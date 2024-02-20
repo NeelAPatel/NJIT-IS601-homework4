@@ -1,9 +1,9 @@
 from faker import Faker
-
+from decimal import Decimal
 fake = Faker()
 
 #Calculator requires a pair of numbers from, picking decimals on purpose
-numPair = (round(fake.random.uniform(0, 20), 2),round(fake.random.uniform(0, 20), 2))
+numPair = (Decimal(fake.random.uniform(0, 20), 2),Decimal(fake.random.uniform(0, 20), 2))
 
 # Define four options
 options = ['Add', 'Subtract', 'Multiply', 'Divide']
