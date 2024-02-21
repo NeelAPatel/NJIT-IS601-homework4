@@ -1,9 +1,10 @@
 # pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long, trailing-whitespace, missing-final-newline
 import sys
-from calculator import Calculator
 from decimal import Decimal, InvalidOperation
+from calculator import Calculator
 
-def calculate_and_print(a, b, operation_name):
+def run_calculations(a:Decimal, b:Decimal, operation_name:str):
+    # uses functions imported from calc.operations to randomly generate one of the ops
     operation_maps = {
         'add': Calculator.add,
         'subtract': Calculator.subtract,
@@ -11,28 +12,39 @@ def calculate_and_print(a, b, operation_name):
         'divide': Calculator.divide
     }
 
+
     # Unified error handling for decimal conversion
     try:
-        a_decimal, b_decimal = map(Decimal, [a, b])
-        result = operation_maps.get(operation_name) # Use get to handle unknown operations
-        if result:
-            print(f"The result of {a} {operation_name} {b} is equal to {result(a_decimal, b_decimal)}")
+        #Test if a and b can be set to decimal
+        a_decimal = Decimal(a)
+        b_decimal = Decimal(b) 
+        
+        curr_operation = operation_maps.get(operation_name) # Use get to handle unknown operations
+        
+        if curr_operation:
+            print(f"Result: {a} {operation_name} {b} = {curr_operation(a_decimal, b_decimal)}")
         else:
             print(f"Unknown operation: {operation_name}")
-    except InvalidOperation:
+
+    except InvalidOperation: # not a number
         print(f"Invalid number input: {a} or {b} is not a valid number.")
-    except ZeroDivisionError:
+    except ZeroDivisionError: # Dividing by zero
         print("Error: Division by zero.")
     except Exception as e: # Catch-all for unexpected errors
         print(f"An error occurred: {e}")
 
 def main():
+    # Control the input
+    # 4 inputs only 
     if len(sys.argv) != 4:
         print("Usage: python calculator_main.py <number1> <number2> <operation>")
         sys.exit(1)
     
-    _, a, b, operation = sys.argv
-    calculate_and_print(a, b, operation)
+    a = sys.argv[1]
+    b = sys.argv[2]
+    operation = sys.argv[3]
+    
+    run_calculations(a, b, operation)
 
 if __name__ == '__main__':
     main()
