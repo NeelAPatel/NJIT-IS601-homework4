@@ -16,36 +16,42 @@ def num_records(request):
     return request.config.getoption("--num_records")
 
 
-
-def generate_test_data(num_records):
-    # Define operation mappings for both Calculator and Calculation tests
-    operation_mappings = {
+def generate_test_data(num_records): 
+    # uses functions imported from calc.operations to randomly generate one of the ops
+    operation_maps = {
         'add': add,
         'subtract': subtract,
         'multiply': multiply,
         'divide': divide
     }
-    # Generate test data
-    for _ in range(num_records):
+
+    #For every record we need to generate
+    for i in range(num_records): 
+        #Generate two random numbers;
         a = Decimal(fake.random_number(digits=2))
-        b = Decimal(fake.random_number(digits=2)) if _ % 4 != 3 else Decimal(fake.random_number(digits=1))
-        operation_name = fake.random_element(elements=list(operation_mappings.keys()))
-        operation_func = operation_mappings[operation_name]
-        
-        # Ensure b is not zero for divide operation to prevent division by zero in expected calculation
+        b = Decimal(fake.random_number(digits=2))
+        # generate operation
+        operation_name = fake.random_element(elements=list(operation_maps.keys())) #returns index
+        operation_func = operation_maps[operation_name]
+
+        #Check if 'divide' and b=0; if true, then expect error
         if operation_func == divide:
-            b = Decimal('1') if b == Decimal('0') else b
-        
+            b = Decimal('1') if b == Decimal('0') else b # Set b value to 1 so it doesn't immediately fail
+
+        # Fall back check incase b somehow changes
+            
         try:
+            # IF b somehow is still 0 + divide... 
             if operation_func == divide and b == Decimal('0'):
-                expected = "ZeroDivisionError"
+                expected = "ZeroDivisionError" #Expect an error to show
             else:
-                expected = operation_func(a, b)
+                expected = operation_func(a, b) #otherwise perform function as intended
         except ZeroDivisionError:
             expected = "ZeroDivisionError"
-        
-        yield a, b, operation_name, operation_func, expected
 
+
+    # Yield executes a generator function generate the below variables (still confused on this)
+    yield a, b, operation_name, operation_func, expected
 
 def pytest_generate_tests(metafunc):
     # Check if the test is expecting any of the dynamically generated fixtures
