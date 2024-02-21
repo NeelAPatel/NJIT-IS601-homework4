@@ -7,14 +7,14 @@ from calculator.operations import add, subtract, multiply, divide
 
 fake = Faker()
 
-def pytest_addoption(parser):
-    parser.addoption("--num_records", action="store", default=5, type=int, help="Number of test records to generate")
 
 @pytest.fixture
 def num_records(request):
     """Provide the number of records as specified by the command-line option."""
     return request.config.getoption("--num_records")
 
+def pytest_addoption(parser):
+    parser.addoption("--num_records", action="store", default=5, type=int, help="Number of test records to generate")
 
 def generate_test_data(num_records): 
     # uses functions imported from calc.operations to randomly generate one of the ops
@@ -48,10 +48,9 @@ def generate_test_data(num_records):
                 expected = operation_func(a, b) #otherwise perform function as intended
         except ZeroDivisionError:
             expected = "ZeroDivisionError"
-
-
-    # Yield executes a generator function generate the below variables (still confused on this)
-    yield a, b, operation_name, operation_func, expected
+        # Yield executes a generator function generate the below variables (still confused on this)
+        #Generates for each record in num_records
+        yield a, b, operation_name, operation_func, expected
 
 def pytest_generate_tests(metafunc):
     # Check if the test is expecting any of the dynamically generated fixtures

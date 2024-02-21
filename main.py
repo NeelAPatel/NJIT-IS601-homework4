@@ -4,7 +4,7 @@ from calculator import Calculator
 from decimal import Decimal, InvalidOperation
 
 def calculate_and_print(a, b, operation_name):
-    operation_mappings = {
+    operation_maps = {
         'add': Calculator.add,
         'subtract': Calculator.subtract,
         'multiply': Calculator.multiply,
@@ -14,7 +14,7 @@ def calculate_and_print(a, b, operation_name):
     # Unified error handling for decimal conversion
     try:
         a_decimal, b_decimal = map(Decimal, [a, b])
-        result = operation_mappings.get(operation_name) # Use get to handle unknown operations
+        result = operation_maps.get(operation_name) # Use get to handle unknown operations
         if result:
             print(f"The result of {a} {operation_name} {b} is equal to {result(a_decimal, b_decimal)}")
         else:
