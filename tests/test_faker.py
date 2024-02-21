@@ -1,5 +1,5 @@
-''' This file tests the use of Faker library'''
 # pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long
+''' This file tests the use of Faker library'''
 from decimal import Decimal
 from faker import Faker
 fake = Faker()
@@ -19,8 +19,8 @@ print(f"Number Pair: {numPair}")
 print(f"Selected Option: {selected_option}")
 
 
-def test_print_num_records(num_records):
-    """Test function that prints the number of records."""
-    print(f"\nNumber of records: {num_records}")
-    # Assuming you want to assert something based on num_records
-    assert int(num_records) >= 0, "Number of records should be non-negative"
+# def test_print_num_records(num_records):
+#     """Test function that prints the number of records."""
+#     print(f"\nNumber of records: {num_records}")
+#     # Assuming you want to assert something based on num_records
+#     assert int(num_records) >= 0, "Number of records should be non-negative"

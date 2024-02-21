@@ -1,3 +1,4 @@
+# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long
 """ This module tests at the main calculator level where users operate the program"""
 from calculator import Calculator
 

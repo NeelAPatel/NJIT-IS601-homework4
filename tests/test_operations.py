@@ -1,3 +1,4 @@
+# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long
 """Module for testing the Operations Itself
 
 This module tests the basic operations provided by the calculator.operations module,
