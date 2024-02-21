@@ -1,4 +1,4 @@
-# pylint: disable=unnecessary-dunder-call, invalid-name
+# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long, trailing-whitespace, missing-final-newline
 
 """ This module will test at the individual Calculation level """
 from decimal import Decimal

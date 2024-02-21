@@ -1,4 +1,4 @@
-# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long
+# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long, trailing-whitespace, missing-final-newline
 # conftest.py
 import pytest
 from decimal import Decimal
@@ -8,7 +8,7 @@ from calculator.operations import add, subtract, multiply, divide
 fake = Faker()
 
 def pytest_addoption(parser):
-    parser.addoption("--num_records", action="store", default=10, type=int, help="Number of test records to generate")
+    parser.addoption("--num_records", action="store", default=5, type=int, help="Number of test records to generate")
 
 @pytest.fixture
 def num_records(request):

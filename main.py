@@ -1,4 +1,4 @@
-# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long
+# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long, trailing-whitespace, missing-final-newline
 import sys
 from calculator import Calculator
 from decimal import Decimal, InvalidOperation

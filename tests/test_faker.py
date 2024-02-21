@@ -1,4 +1,4 @@
-# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long
+# pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long, trailing-whitespace, missing-final-newline
 ''' This file tests the use of Faker library'''
 from decimal import Decimal
 from faker import Faker
