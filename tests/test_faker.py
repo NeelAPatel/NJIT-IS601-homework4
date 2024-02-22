@@ -17,10 +17,3 @@ selected_option = fake.random_element(elements=options)
 # Output the results
 print(f"Number Pair: {numPair}")
 print(f"Selected Option: {selected_option}")
-
-
-# def test_print_num_records(num_records):
-#     """Test function that prints the number of records."""
-#     print(f"\nNumber of records: {num_records}")
-#     # Assuming you want to assert something based on num_records
-#     assert int(num_records) >= 0, "Number of records should be non-negative"

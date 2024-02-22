@@ -44,6 +44,12 @@ pip3 install pytest pytest-pylint pytest-cov
 5. Run the pytest to see 100% coverage
 ```
 pytest --pylint --cov
+pytest --num_records=20
+```
+
+6. Run main.py to see calculator in action
+```
+python main.py 5 6 add
 ```
 
 # Note

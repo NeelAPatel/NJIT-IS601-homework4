@@ -1,7 +1,8 @@
 # pylint: disable=unnecessary-dunder-call, invalid-name, line-too-long, trailing-whitespace, missing-final-newline
 # conftest.py
-import pytest
+""" This File tests the configuration of the faker library and generates randomized parameters for testing """
 from decimal import Decimal
+import pytest
 from faker import Faker
 from calculator.operations import add, subtract, multiply, divide
 
@@ -14,9 +15,11 @@ def num_records(request):
     return request.config.getoption("--num_records")
 
 def pytest_addoption(parser):
+    """Enables --num_records as an optional flag for pytest"""
     parser.addoption("--num_records", action="store", default=5, type=int, help="Number of test records to generate")
 
 def generate_test_data(num_records): 
+    """ Generates testing parameterized data for calculation"""
     # uses functions imported from calc.operations to randomly generate one of the ops
     operation_maps = {
         'add': add,
@@ -39,7 +42,6 @@ def generate_test_data(num_records):
             b = Decimal('1') if b == Decimal('0') else b # Set b value to 1 so it doesn't immediately fail
 
         # Fall back check incase b somehow changes
-            
         try:
             # IF b somehow is still 0 + divide... 
             if operation_func == divide and b == Decimal('0'):
@@ -53,6 +55,7 @@ def generate_test_data(num_records):
         yield a, b, operation_name, operation_func, expected
 
 def pytest_generate_tests(metafunc):
+    """ Generates tests based on test-data """
     # Check if the test is expecting any of the dynamically generated fixtures
     if {"a", "b", "expected"}.intersection(set(metafunc.fixturenames)):
         num_records = metafunc.config.getoption("num_records")
