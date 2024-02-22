@@ -19,7 +19,8 @@ def run_calculations(a:Decimal, b:Decimal, operation_name:str):
         a_decimal = Decimal(a)
         b_decimal = Decimal(b) 
         
-        curr_operation = operation_maps.get(operation_name) # Use get to handle unknown operations
+        #Use .get to handle unknown operations from the dictionary
+        curr_operation = operation_maps.get(operation_name) 
         
         if curr_operation:
             print(f"Result: {a} {operation_name} {b} = {curr_operation(a_decimal, b_decimal)}")
@@ -40,10 +41,12 @@ def main():
         print("Usage: python calculator_main.py <number1> <number2> <operation>")
         sys.exit(1)
     
+    #Set arguments
     a = sys.argv[1]
     b = sys.argv[2]
-    operation = sys.argv[3]
+    operation = sys.argv[3]  
     
+    #Take system args and run as a function
     run_calculations(a, b, operation)
 
 if __name__ == '__main__':
